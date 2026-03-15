@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
 
-const githubController = require("../controllerts/girhubController")
+const githubController = require("../controllers/githubController")
 
 router.get("/analyser/:username", githubController.analyseUser)
 
