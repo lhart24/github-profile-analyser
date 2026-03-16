@@ -1,9 +1,10 @@
-const githubService = require("../services/githubServices")
+const githubServices = require("../services/githubServices")
+const analyser = require("../utils/analyser")
 
 exports.analyseUser = async(req, res) => {
 
     try{
-        const username = req.params(username)
+        const username = req.params.username
 
         const repo = await githubServices.getRepos(username)
 
@@ -11,6 +12,7 @@ exports.analyseUser = async(req, res) => {
 
         res.json(result)
     }   catch (error) {
-        res.status(500).json({error: "failed to analyse user"})
-    }
+    console.error(error)
+    res.status(500).json({error: "failed to analyse user"})
+}
 }

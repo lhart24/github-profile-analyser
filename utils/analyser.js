@@ -1,4 +1,4 @@
-exports.analyserRepos = (repos) => {
+exports.analyseRepos = (repos) => {
     let totalStars = 0
     let languages = {}
 
@@ -6,15 +6,15 @@ exports.analyserRepos = (repos) => {
 
         totalStars += repo.stargazers_count
 
-        if (repo.languages){
+        if (repo.language){
             languages[repo.language] = (languages[repo.languages] || 0) + 1
         }
-
+        
     })
 
     return {
         repository_count: repos.length,
-        total_start: totalStars,
+        total_stars: totalStars,
         languages: languages
     }
 }

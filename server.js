@@ -1,6 +1,6 @@
 const express = require("express")
 const githubRoutes = require("./routes/githubRoutes")
-const { analyserRepos } = require("./utils/analyser")
+
 const app = express()
 
 app.use(express.json())
