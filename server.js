@@ -1,5 +1,6 @@
 const express = require("express")
 const githubRoutes = require("./routes/githubRoutes")
+const { analyserRepos } = require("./utils/analyser")
 const app = express()
 
 app.use(express.json())
@@ -9,4 +10,5 @@ const PORT = process.env.PORT || 5001
 
 app.listen(PORT, () =>{
     console.log(`Server running on ${PORT}`)
+    
 })
