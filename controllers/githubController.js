@@ -1,4 +1,4 @@
-const githubService = require("../services/githubService")
+const githubService = require("../services/githubServices")
 
 exports.analyseUser = async(req, res) => {
 
