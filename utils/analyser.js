@@ -18,3 +18,16 @@ exports.analyseRepos = (repos) => {
         languages: languages
     }
 }
+
+// to get user favorute language
+
+exports.getFavouriteLanguage = (repos, username) => {
+    const axios = require("axios")
+
+    async function getFavouriteLanguage(username) {
+        
+        const languageData = await axios.get(`https://api.github.com/repo/${username}/${repos}`)
+        // use total bit count for each language to find favourite language
+        console.log(languageData)
+    }
+}
