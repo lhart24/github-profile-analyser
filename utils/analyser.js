@@ -7,7 +7,7 @@ exports.analyseRepos = (repos) => {
         totalStars += repo.stargazers_count
 
         if (repo.language){
-            languages[repo.language] = (languages[repo.languages] || 0) + 1
+            languages[repo.language] = (languages[repo.language] || 0) + 1
         }
         
     })
@@ -20,18 +20,17 @@ exports.analyseRepos = (repos) => {
 }
 
 // to get user favorute language
-
-exports.getFavouriteLanguage = (repos, username) => {
+// fix logic and make the funtion whole 
+exports.getFavouriteLanguage = async (repos, username) => {
     const axios = require("axios")
-
-    async function getFavouriteLanguage(username) {
-        
-        const languageData = await axios.get(`https://api.github.com/repo/${username}/${repos}`)
+    console.log(favouriteLanguage)
+        const languageData = await axios.get(`https://api.github.com/repos/${username}/${repos}`)
         // use total bit count for each language to find favourite language
-        
+        for (let i = 0; i < repos.length; i++){
+            languageRepo = languageData
+        }
 
         return {
-            favouriteLanguage: languageData
+            favouriteLanguage: languageRepo
         }
-    }
 }

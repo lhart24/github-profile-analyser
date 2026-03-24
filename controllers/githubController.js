@@ -10,7 +10,7 @@ exports.analyseUser = async(req, res) => {
 
         const result = analyser.analyseRepos(repo)
 
-        const favouriteLanguage = analyser.getFavouriteLanguage(repo, username)
+        const favouriteLanguage = await analyser.getFavouriteLanguage(repo, username)
 
         res.json(result)
     }   catch (error) {
