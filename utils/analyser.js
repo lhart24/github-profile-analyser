@@ -27,13 +27,13 @@ exports.getFavouriteLanguage = async (repos, username) => {
         
         // use total bit count for each language to find favourite language
         for (let i = 0; i < repos.length; i++){
-            const repoId = repos[i]
+            const repoId = repos[i].name
             const response = await axios.get(`https://api.github.com/repos/${username}/${repoId}`)
 
             
             const languageData = response.data
             for (const languages in languageData){
-                totalLanguages += languageData[languages]
+                totalLanguage += languageData[languages]
             }
         }
         
@@ -41,13 +41,13 @@ exports.getFavouriteLanguage = async (repos, username) => {
         const maxBytes = 0
         const favouriteLanguage = null
 
+        for (const lang in totalLanguage){
+            if (totalLanguage[lang] > maxBytes){
+                totalLanguage[lang] = maxBytes
+                favouriteLanguage = lang
+            }
+        }
         
-
-
-
-
-
-
         return {
             favouriteLanguage: favouriteLanguage
         }
