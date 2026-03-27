@@ -23,7 +23,7 @@ exports.analyseRepos = (repos) => {
 // fix logic and make the funtion whole 
 exports.getFavouriteLanguage = async (repos, username) => {
     const axios = require("axios")
-        const totalLanguage = {}
+        let totalLanguage = {}
         
         // use total bit count for each language to find favourite language
         for (let i = 0; i < repos.length; i++){
@@ -39,7 +39,7 @@ exports.getFavouriteLanguage = async (repos, username) => {
         
 
         const maxBytes = 0
-        const favouriteLanguage = null
+        let favouriteLanguage = null
 
         for (const lang in totalLanguage){
             if (totalLanguage[lang] > maxBytes){
