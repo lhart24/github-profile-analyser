@@ -51,4 +51,7 @@ exports.getFavouriteLanguage = async (repos, username) => {
         return {
             favouriteLanguage: favouriteLanguage
         }
-} 
+}
+
+
+// fix issue with post man result
