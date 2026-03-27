@@ -12,7 +12,10 @@ exports.analyseUser = async(req, res) => {
 
         const favouriteLanguage = await analyser.getFavouriteLanguage(repo, username)
 
-        res.json(result, favouriteLanguage) //// add favourite language funtion later
+        res.json({
+            result: result, 
+            favouriteLanguage: favouriteLanguage
+        }) 
     }   catch (error) {
     console.error(error)
     res.status(500).json({error: "failed to analyse user!"})
