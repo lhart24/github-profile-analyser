@@ -56,5 +56,4 @@ exports.getFavouriteLanguage = async (repos, username) => {
         }
 }
 
-
-// fix issue with post man result
+// add profile report card next with activity, popularity, diversity, and commuinity that sums up total scores of user and gives a grade
