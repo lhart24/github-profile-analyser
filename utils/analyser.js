@@ -34,21 +34,23 @@ exports.getFavouriteLanguage = async (repos, username) => {
             
             const languageData = response.data
             for (const languages in languageData){
-                totalLanguage += languageData[languages]
+                totalLanguage[languages] =  (totalLanguage[languages] || 0) + languageData[languages]
             }
         }
         
 
-        const maxBytes = 0
+        let maxBytes = 0
         let favouriteLanguage = null
 
         for(const [lang, byte] of Object.entries(totalLanguage)) {
-            if (totalLanguage[lang] > maxBytes){
-                totalLanguage[lang] = maxBytes
+
+            if (byte > maxBytes){
                 favouriteLanguage = lang
+                maxBytes = byte
             }
         }
         
+
         return {
             favouriteLanguage: favouriteLanguage
         }
