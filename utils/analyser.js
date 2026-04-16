@@ -63,5 +63,27 @@ exports.GetReportCard = async(repos, username) => {
     const activity = await axios.get(`https://api.github.com/users/${username}/events/public`)
     const activity_data = activity.data
 
+    const report = {
+        totalEvents: activity_data.length,
+        eventTypes: {},
+        timeline: [],
+        insights: {}
+    }
+
+    const sorted = activity_data.sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
+
+    sorted.forEach(event => {
+        
+        report.eventTypes[event.type] = (report.eventTypes[event.type || 0]) + 1
+
+        report.timeline.push({
+            type: event.type,
+            time: event.created_at,
+            repo: event.repo.name
+        })
+    })
+
+
+
     return activity_data
 }
