@@ -83,7 +83,15 @@ exports.GetReportCard = async(repos, username) => {
         })
     })
 
+    if (sorted.length > 1){
+        const start = new Date(sorted[0].created_at)
+        const end = new Date(sorted[sorted.length -  1].created_at)
+        const diffMins = (end - start) / (1000 * 60)
 
+        report.insights.durationMinutes = diffMins
+    }
 
-    return activity_data
+    report.insight.pushes = report.eventTypes["PushEvent"] || 0
+
+    return report
 }
