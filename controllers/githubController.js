@@ -7,12 +7,14 @@ exports.analyseUser = async(req, res) => {
         const repo = await githubServices.getRepos(username)
         const result = analyser.analyseRepos(repo)
         const favouriteLanguage = await analyser.getFavouriteLanguage(repo, username)
-        const report = await analyser.GetReportCard(repo, username)
+        const report = await analyser.GetReportCard(username)
+        const score = await analyser.GetScore(username)
 
         res.json({
             result: result,
             favouriteLanguage: favouriteLanguage,
             report: report,
+            score: score,
         })
         
     } catch (error) {

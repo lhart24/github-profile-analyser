@@ -58,7 +58,7 @@ exports.getFavouriteLanguage = async (repos, username) => {
 
 // add profile report card next with activity, popularity, diversity, and commuinity that sums up total scores of user and gives a grade
 
-exports.GetReportCard = async(repos, username) => {
+exports.GetReportCard = async(username) => {
     const axios = require ("axios")
     const activity = await axios.get(`https://api.github.com/users/${username}/events/public`)
     const activity_data = activity.data
@@ -91,7 +91,18 @@ exports.GetReportCard = async(repos, username) => {
         report.insights.durationMinutes = diffMins
     }
 
-    report.insight.pushes = report.eventTypes["PushEvent"] || 0
+    report.insights.pushes = report.eventTypes["PushEvent"] || 0
 
     return report
+}
+
+
+exports.GetScore = async(repos, username) => {
+    const axios = require ("axios")
+    const activity = await axios.get(`https://api.github.com/users/${username}/events/public`)
+    const activity_data = activity.data
+
+    
+
+    return activity_data
 }
