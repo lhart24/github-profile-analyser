@@ -65,7 +65,7 @@ exports.GetReportCard = async(username) => {
 
     const report = {
         totalEvents: activity_data.length,
-        eventTypes: {},
+        eventTypes: {}, // fix later, returns null for counter
         timeline: [],
         insights: {}
     }
@@ -97,12 +97,46 @@ exports.GetReportCard = async(username) => {
 }
 
 
-exports.GetScore = async(repos, username) => {
+exports.GetScore = async(username) => {
     const axios = require ("axios")
     const activity = await axios.get(`https://api.github.com/users/${username}/events/public`)
     const activity_data = activity.data
 
-    
+    let totalScore = 0
+    for (i = 0; i < activity_data.length; i++){
+        switch (activity_data.eventTypes){
+            // weights for different events
+            case "PushEvent":
+                totalScore += 3
+                break
+            case "PullRequestEvent":
+                totalScore += 3
+                break
+            case "CommitCommentEvent":
+                totalScore += 2
+                break
+            case "IssueEvent":
+                totalScore += 2
+                break
+            case "IssueCommitEvent":
+                totalScore += 2
+                break
+            case "WatchEvent":
+                totalScore += 1
+                break
+            case "ForkEvent":
+                totalScore += 1
+                break
+            case "CreateEvent":
+                totalScore += 1
+                break
+            case "DeleteEvent":
+                totalScore += 1
+                break
+            default:
+                totalScore = 0
+        }   
+    }
 
-    return activity_data
+    return totalScore;
 }
