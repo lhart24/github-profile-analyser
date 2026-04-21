@@ -103,38 +103,37 @@ exports.GetScore = async(username) => {
     const activity_data = activity.data
 
     let totalScore = 0
-    for (i = 0; i < activity_data.length; i++){
-        switch (activity_data.eventTypes){
+    for (let i = 0; i < activity_data.length; i++){
+        switch (activity_data[i].type){
             // weights for different events
             case "PushEvent":
                 totalScore += 3
-                break
+                break;
             case "PullRequestEvent":
                 totalScore += 3
-                break
+                break;
             case "CommitCommentEvent":
                 totalScore += 2
-                break
+                break;
             case "IssueEvent":
                 totalScore += 2
-                break
-            case "IssueCommitEvent":
+                break;
+            case "IssueCommentEvent":
                 totalScore += 2
-                break
+                break;
             case "WatchEvent":
                 totalScore += 1
-                break
+                break;
             case "ForkEvent":
                 totalScore += 1
-                break
+                break;
             case "CreateEvent":
-                totalScore += 1
-                break
+                totalScore += 1;
             case "DeleteEvent":
                 totalScore += 1
-                break
+                break;
             default:
-                totalScore = 0
+                break;
         }   
     }
 
