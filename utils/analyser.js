@@ -158,5 +158,6 @@ exports.GetScore = async(username) => {
     else if (rating >= 0 && rating <= 0.2){
         Grade = "A"
     }
+    // fix later to return both score and grade in the controller
     return totalScore, Grade;
 }
