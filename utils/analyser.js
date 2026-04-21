@@ -159,5 +159,5 @@ exports.GetScore = async(username) => {
         Grade = "A"
     }
     // fix later to return both score and grade in the controller
-    return totalScore, Grade;
+    return { totalScore, Grade };
 }
