@@ -9,6 +9,7 @@ exports.analyseUser = async(req, res) => {
         const favouriteLanguage = await analyser.getFavouriteLanguage(repo, username)
         const report = await analyser.GetReportCard(username)
         const score = await analyser.GetScore(username)
+        
 
         res.json({
             result: result,

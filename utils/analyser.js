@@ -98,6 +98,8 @@ exports.GetReportCard = async(username) => {
 
 
 exports.GetScore = async(username) => {
+    console.log("GET SCORE RUNNING")
+    console.log("USERNAME:", username)
     const axios = require ("axios")
     const activity = await axios.get(`https://api.github.com/users/${username}/events/public`)
     const activity_data = activity.data
@@ -129,13 +131,32 @@ exports.GetScore = async(username) => {
                 break;
             case "CreateEvent":
                 totalScore += 1;
+                break;
             case "DeleteEvent":
                 totalScore += 1
                 break;
             default:
                 break;
-        }   
+        }
     }
-
-    return totalScore;
+    
+    // get length of activity data from activity data.type, maybe append them all into a list, find average by length / points e.g. 0.2 = good activty 0.8 = bad activity 
+    let rating = activity_data.length / totalScore
+    let Grade = ""
+    if (rating >= 0.8 && rating <= 1){
+        Grade = "E"
+    }
+    else if (rating >= 0.6 && rating <= 0.8){
+        Grade = "D"
+    }
+    else if (rating >= 0.4 && rating <= 0.6){
+        Grade = "C"
+    }
+    else if (rating >= 0.2 && rating <= 0.4){
+        Grade = "B"
+    }
+    else if (rating >= 0 && rating <= 0.2){
+        Grade = "A"
+    }
+    return totalScore, Grade;
 }
