@@ -9,10 +9,10 @@
   "name": "github-profile-analyser",
   "version": "1.0.0",
   "description": "github profile analyser",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon app.js"
+    "dev": "nodemon server.js"
   },
   "author": "Luke Hartley",
   "license": "ISC"
