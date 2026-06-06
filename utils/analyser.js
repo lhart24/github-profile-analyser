@@ -22,39 +22,29 @@ exports.analyseRepos = (repos) => {
 // to get user favorute language
 // fix logic and make the funtion whole 
 exports.getFavouriteLanguage = async (repos, username) => {
+    console.log("getFavouriteLanguage started")
+
     const axios = require("axios")
-        let totalLanguage = {}
-        
-        // use total bit count for each language to find favourite language
-        for (let i = 0; i < repos.length; i++){
-            const repoId = repos[i].name
-            const response = await axios.get(`https://api.github.com/repos/${username}/${repoId}/languages`)
+    let totalLanguage = {}
 
+    for (let i = 0; i < repos.length; i++) {
+        console.log(`Processing repo ${i + 1}/${repos.length}: ${repos[i].name}`)
 
-            
-            const languageData = response.data
-            for (const languages in languageData){
-                totalLanguage[languages] =  (totalLanguage[languages] || 0) + languageData[languages]
-            }
+        const repoId = repos[i].name
+
+        const response = await axios.get(
+            `https://api.github.com/repos/${username}/${repoId}/languages`
+        )
+
+        const languageData = response.data
+
+        for (const language in languageData) {
+            totalLanguage[language] =
+                (totalLanguage[language] || 0) + languageData[language]
         }
-        
-
-        let maxBytes = 0
-        let favouriteLanguage = null
-
-        for(const [lang, byte] of Object.entries(totalLanguage)) {
-
-            if (byte > maxBytes){
-                favouriteLanguage = lang
-                maxBytes = byte
-            }
-        }
-        
-
-        return {
-            favouriteLanguage: favouriteLanguage
-        }
+    }
 }
+    console.log("getFavouriteLanguage finished")
 
 // add profile report card next with activity, popularity, diversity, and commuinity that sums up total scores of user and gives a grade
 
@@ -74,8 +64,7 @@ exports.GetReportCard = async(username) => {
 
     sorted.forEach(event => {
         
-        report.eventTypes[event.type] = (report.eventTypes[event.type || 0]) + 1
-
+        report.eventTypes[event.type] = (report.eventTypes[event.type] || 0) + 1
         report.timeline.push({
             type: event.type,
             time: event.created_at,
@@ -117,7 +106,7 @@ exports.GetScore = async(username) => {
             case "CommitCommentEvent":
                 totalScore += 2
                 break;
-            case "IssueEvent":
+            case "IssuesEvent":
                 totalScore += 2
                 break;
             case "IssueCommentEvent":
