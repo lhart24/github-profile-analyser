@@ -82,6 +82,8 @@ exports.GetReportCard = async(username) => {
 
     report.insights.pushes = report.eventTypes["PushEvent"] || 0
 
+    console.log("getFavouriteLanguage finished")
+    
     return report
 }
 
