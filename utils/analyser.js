@@ -134,21 +134,24 @@ exports.GetScore = async(username) => {
     // get length of activity data from activity data.type, maybe append them all into a list, find average by length / points e.g. 0.2 = good activty 0.8 = bad activity 
     let rating = activity_data.length / totalScore
     let Grade = ""
-    if (rating >= 0.8 && rating <= 1){
-        Grade = "E"
+    if (totalScore === 0 || activity_data.length === 0){
+        return {totalScore: 0, Grade: "E"}
+    } else {
+        if (rating >= 0.8 && rating <= 1){
+            Grade = "E"
+        }
+        else if (rating >= 0.6 && rating <= 0.8){
+            Grade = "D"
+        }
+        else if (rating >= 0.4 && rating <= 0.6){
+            Grade = "C"
+        }
+        else if (rating >= 0.2 && rating <= 0.4){
+            Grade = "B"
+        }
+        else if (rating >= 0 && rating <= 0.2){
+            Grade = "A"
+        }
     }
-    else if (rating >= 0.6 && rating <= 0.8){
-        Grade = "D"
-    }
-    else if (rating >= 0.4 && rating <= 0.6){
-        Grade = "C"
-    }
-    else if (rating >= 0.2 && rating <= 0.4){
-        Grade = "B"
-    }
-    else if (rating >= 0 && rating <= 0.2){
-        Grade = "A"
-    }
-    // fix later to return both score and grade in the controller
-    return { totalScore, Grade };
+        return { totalScore, Grade };
 }

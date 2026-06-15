@@ -12,8 +12,7 @@ exports.analyseUser = async(req, res) => {
         const result = analyser.analyseRepos(repo)
         console.log("✓ Repo analysis complete")
 
-        const favouriteLanguage =
-            await analyser.getFavouriteLanguage(repo, username)
+        const favouriteLanguage = await analyser.getFavouriteLanguage(repo, username)
         console.log("✓ Favourite language complete")
 
         const report = await analyser.GetReportCard(username)
