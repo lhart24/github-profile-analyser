@@ -22,29 +22,45 @@ exports.analyseRepos = (repos) => {
 // to get user favorute language
 
 exports.getFavouriteLanguage = async (repos, username) => {
-    console.log("getFavouriteLanguage started")
+    console.log("getFavouriteLanguage started");
 
-    const axios = require("axios")
-    let totalLanguage = {}
+    const axios = require("axios");
+    let totalLanguage = {};
 
     for (let i = 0; i < repos.length; i++) {
-        console.log(`Processing repo ${i + 1}/${repos.length}: ${repos[i].name}`)
+        console.log(`Processing repo ${i + 1}/${repos.length}: ${repos[i].name}`);
 
-        const repoId = repos[i].name
+        const repoName = repos[i].name;
 
         const response = await axios.get(
-            `https://api.github.com/repos/${username}/${repoId}/languages`
-        )
+            `https://api.github.com/repos/${username}/${repoName}/languages`
+        );
 
-        const languageData = response.data
+        const languageData = response.data;
 
         for (const language in languageData) {
             totalLanguage[language] =
-                (totalLanguage[language] || 0) + languageData[language]
+                (totalLanguage[language] || 0) + languageData[language];
         }
     }
-}
-    console.log("getFavouriteLanguage finished")
+
+    let favouriteLanguage = "None";
+    let highestBytes = 0;
+
+    for (const language in totalLanguage) {
+        if (totalLanguage[language] > highestBytes) {
+            highestBytes = totalLanguage[language];
+            favouriteLanguage = language;
+        }
+    }
+
+    console.log("getFavouriteLanguage finished");
+
+    return {
+        favouriteLanguage,
+        languages: totalLanguage
+    };
+};
 
 
 
