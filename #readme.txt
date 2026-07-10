@@ -5,6 +5,7 @@ GitHub Profile Analyser
 A full-stack web application that analyses public GitHub profiles and provides insights into a user's repositories, programming languages, activity, and overall GitHub presence.
 
 This project was built to explore working with REST APIs, asynchronous data fetching, and presenting data through an intuitive user interface.
+
 Features:
 Search for any public GitHub user
 Analyse public repositories
