@@ -17,7 +17,7 @@ export default function App() {
     }
     setLoading(false);
   };
-  
+
 
   return (
     <div style={{ padding: 20, fontFamily: "Arial" }}>

@@ -20,7 +20,7 @@ exports.analyseRepos = (repos) => {
 }
 
 // to get user favorute language
-// fix logic and make the funtion whole 
+
 exports.getFavouriteLanguage = async (repos, username) => {
     console.log("getFavouriteLanguage started")
 
@@ -46,7 +46,7 @@ exports.getFavouriteLanguage = async (repos, username) => {
 }
     console.log("getFavouriteLanguage finished")
 
-// add profile report card next with activity, popularity, diversity, and commuinity that sums up total scores of user and gives a grade
+
 
 exports.GetReportCard = async(username) => {
     const axios = require ("axios")
@@ -55,7 +55,7 @@ exports.GetReportCard = async(username) => {
 
     const report = {
         totalEvents: activity_data.length,
-        eventTypes: {}, // fix later, returns null for counter
+        eventTypes: {}, 
         timeline: [],
         insights: {}
     }
