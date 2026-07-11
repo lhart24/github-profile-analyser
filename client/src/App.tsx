@@ -1,23 +1,37 @@
 import { useState } from "react";
 import axios from "axios";
 
-export default function App() {
-  const [username, setUsername] = useState("");
-  const [data, setData] = useState<any>(null);
-  const [loading, setLoading] = useState(false);
+interface GithubData {
+  result: {
+    repository_count: number;
+    total_stars: number;
+  };
+  score?: {
+    totalScore: number;
+    Grade: string;
+  };
+  favouriteLanguage?: {
+    favouriteLanguage: string;
+  };
+}
 
-  const fetchData = async () => {
+export default function App() {
+  const [username, setUsername] = useState<string>("");
+  const [data, setData] = useState<GithubData | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const fetchData = async (): Promise<void> => {
     if (!username.trim()) return;
 
     setLoading(true);
 
     try {
-      const res = await axios.get(
+      const res = await axios.get<GithubData>(
         `http://localhost:5001/api/github/analyser/${username}`
       );
 
       setData(res.data);
-    } catch (err) {
+    } catch (err: unknown) {
       console.error(err);
       alert("Failed to fetch GitHub profile.");
     }
@@ -61,7 +75,9 @@ export default function App() {
         >
           <input
             value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setUsername(e.target.value)
+            }
             placeholder="Enter GitHub username..."
             style={{
               flex: 1,
@@ -138,7 +154,7 @@ function Stat({
   value,
 }: {
   title: string;
-  value: any;
+  value: string | number | undefined;
 }) {
   return (
     <div
