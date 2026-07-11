@@ -1,7 +1,7 @@
 GitHub Profile Analyser
 
 🚧 Work in Progress
-![GitHub Profile Analyser Screenshot](./screenshots/main2.png)
+
 
 A full-stack web application that analyses public GitHub profiles and provides insights into a user's repositories, programming languages, activity, and overall GitHub presence.
 
